@@ -21,6 +21,10 @@ character_height = character_size[1]
 character_x_pos = (screen_width/2)-(character_width/2)
 character_y_pos = screen_height-character_height
 
+
+to_x = 0
+to_y = 0
+
 running = True
 # is game running?
 
@@ -28,6 +32,35 @@ while running:
     for event in pygame.event.get():  # Is event occured?
         if event.type == pygame.QUIT:  # Closing display event occur
             running = False  # Game not running
+
+        if event.type == pygame.KEYDOWN:  # Key pressed
+            if event.key == pygame.K_LEFT:
+                to_x -= .5
+            if event.key == pygame.K_RIGHT:
+                to_x += .5
+            elif event.key == pygame.K_UP:
+                to_y -= .5
+            elif event.key == pygame.K_DOWN:
+                to_y += .5
+        if event.type == pygame.KEYUP:  # Key Pressed
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                to_x = 0
+            elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                to_y = 0
+
+    character_x_pos += to_x
+    character_y_pos += to_y
+# character movement - width threshold
+    if character_x_pos < 0:
+        character_x_pos = 0
+    elif character_x_pos > screen_width-character_width:
+        character_x_pos = screen_width-character_width
+
+# character movement - height threshold
+    if character_y_pos < 0:
+        character_y_pos = 0
+    elif character_y_pos > screen_height-character_height:
+        character_y_pos = screen_height-character_height
 
     # screen.fill("#c5cae9") #setting background with color
     screen.blit(background, (0, 0))  # setting background with png.file
