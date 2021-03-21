@@ -1,5 +1,5 @@
 import pygame
-
+####################################Basic Elements in Pygame####################################
 pygame.init()
 
 screen_width = 480
@@ -10,6 +10,7 @@ pygame.display.set_caption("My Game")
 
 clock = pygame.time.Clock()  # Frame per Second
 
+########################################Game Settings###########################################
 background = pygame.image.load(
     "C:/Users/melis/OneDrive/바탕 화면/독학실습/Py_Game/Background.png")
 
@@ -46,7 +47,7 @@ total_time = 10
 start_ticks = pygame.time.get_ticks()
 
 while running:
-    dt = clock.tick(50)  # Setting FPS
+    dt = clock.tick(30)  # Setting FPS
     for event in pygame.event.get():  # Is event occured?
         if event.type == pygame.QUIT:  # Closing display event occur
             running = False  # Game not running
@@ -80,7 +81,7 @@ while running:
     elif character_y_pos > screen_height-character_height:
         character_y_pos = screen_height-character_height
 
-    # Character & Enemy BOOM! Collide
+######################################Collision event##################################
     character_rect = character.get_rect()
     character_rect.left = character_x_pos
     character_rect.top = character_y_pos
@@ -94,6 +95,7 @@ while running:
         print("BOO*°OO★M!!!☆$*.°★* 。")
         running = False
 
+########################################Draw Screen#####################################
     # screen.fill("#c5cae9") #setting background with color
     screen.blit(background, (0, 0))  # setting background with png.file
     screen.blit(character, (character_x_pos, character_y_pos))
@@ -112,4 +114,5 @@ while running:
 
     pygame.display.update()  # game screen keep drawing
 # if game not running
+pygame.time.delay(1500)
 pygame.quit()
