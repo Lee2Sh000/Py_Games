@@ -38,6 +38,30 @@ enemy_height = enemy_size[1]
 enemy_x_pos = (screen_width/2)-(enemy_width/2)
 enemy_y_pos = (screen_height/2)-(enemy_height/2)
 
+enemy2 = pygame.image.load(
+    "C:/Users/melis/OneDrive/바탕 화면/독학실습/Py_Game/enemy2.png")
+enemy2_size = enemy2.get_rect().size
+enemy2_width = enemy2_size[0]
+enemy2_height = enemy2_size[1]
+enemy2_x_pos = (screen_width/4)-(enemy2_width/4)
+enemy2_y_pos = (screen_height/10)
+
+enemy3 = pygame.image.load(
+    "C:/Users/melis/OneDrive/바탕 화면/독학실습/Py_Game/enemy3.png")
+enemy3_size = enemy3.get_rect().size
+enemy3_width = enemy3_size[0]
+enemy3_height = enemy3_size[1]
+enemy3_x_pos = (screen_width)-(enemy3_width)
+enemy3_y_pos = (screen_height/2)
+
+goal = pygame.image.load(
+    "C:/Users/melis/OneDrive/바탕 화면/독학실습/Py_Game/goal.png")
+goal_size = goal.get_rect().size
+goal_width = goal_size[0]
+goal_height = goal_size[1]
+goal_x_pos = (screen_width)-(goal_width)
+goal_y_pos = (0)
+
 # Game Font
 game_font = pygame.font.Font(None, 40)
 
@@ -90,9 +114,24 @@ while running:
     enemy_rect.left = enemy_x_pos
     enemy_rect.top = enemy_y_pos
 
+    enemy2_rect = enemy2.get_rect()
+    enemy2_rect.left = enemy2_x_pos
+    enemy2_rect.top = enemy2_y_pos
+
+    enemy3_rect = enemy3.get_rect()
+    enemy3_rect.left = enemy3_x_pos
+    enemy3_rect.top = enemy3_y_pos
+
+    goal_rect = goal.get_rect()
+    goal_rect.left = goal_x_pos
+    goal_rect.top = goal_y_pos
+
     # Is collide
-    if character_rect.colliderect(enemy_rect):
+    if character_rect.colliderect(enemy_rect) or character_rect.colliderect(enemy2_rect) or character_rect.colliderect(enemy3_rect):
         print("! .°★*.$☆ B O o O o O M ☆$*.°★* 。!")
+        running = False
+    elif character_rect.colliderect(goal_rect):
+        print("🎉Mission Success🎉")
         running = False
 
 ########################################Draw Screen#####################################
@@ -100,6 +139,9 @@ while running:
     screen.blit(background, (0, 0))  # setting background with png.file
     screen.blit(character, (character_x_pos, character_y_pos))
     screen.blit(enemy, (enemy_x_pos, enemy_y_pos))
+    screen.blit(enemy2, (enemy2_x_pos, enemy2_y_pos))
+    screen.blit(enemy3, (enemy3_x_pos, enemy3_y_pos))
+    screen.blit(goal, (goal_x_pos, goal_y_pos))
 
     # Timer
     elapsed_time = (pygame.time.get_ticks()-start_ticks)/1000  # ms => second
