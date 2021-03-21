@@ -92,7 +92,7 @@ while running:
 
     # Is collide
     if character_rect.colliderect(enemy_rect):
-        print("BOO*°OO★M!!!☆$*.°★* 。")
+        print("! .°★*.$☆ B O o O o O M ☆$*.°★* 。!")
         running = False
 
 ########################################Draw Screen#####################################
